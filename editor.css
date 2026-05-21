@@ -1,0 +1,611 @@
+/**
+ * Reveal.js Presentation Editor Styles
+ */
+
+/* ============================================
+   CSS Variables
+   ============================================ */
+:root {
+	--sidebar-width: 220px;
+	--toolbar-height: 48px;
+	--primary-color: #2196F3;
+	--secondary-color: #607D8B;
+	--bg-dark: #1a1a1a;
+	--bg-darker: #121212;
+	--bg-light: #2d2d2d;
+	--text-primary: #ffffff;
+	--text-secondary: #b0b0b0;
+	--accent-color: #4CAF50;
+	--danger-color: #f44336;
+	--border-color: #404040;
+	--hover-color: #383838;
+	--selected-color: #2196F3;
+}
+
+/* ============================================
+   Reset / Base
+   ============================================ */
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+	background: var(--bg-darker);
+	color: var(--text-primary);
+}
+
+/* ============================================
+   Main Layout: 3 Columns
+   ============================================ */
+.editor-container {
+	display: grid;
+	grid-template-columns: var(--sidebar-width) 1fr 1fr;
+	grid-template-rows: 1fr;
+	height: 100vh;
+	overflow: hidden;
+}
+
+/* ============================================
+   Sidebar (Left Panel)
+   ============================================ */
+.sidebar {
+	background: var(--bg-dark);
+	border-right: 1px solid var(--border-color);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.sidebar-header {
+	padding: 16px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.logo {
+	font-size: 16px;
+	margin: 0;
+	color: var(--text-primary);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.sidebar-toolbar {
+	display: flex;
+	gap: 8px;
+	padding: 12px;
+	border-bottom: 1px solid var(--border-color);
+	justify-content: center;
+}
+
+.btn-tool {
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 8px;
+	background: var(--bg-light);
+	color: var(--text-primary);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+}
+
+.btn-tool:hover {
+	background: var(--hover-color);
+	transform: scale(1.05);
+}
+
+.btn-tool .icon {
+	font-size: 18px;
+}
+
+.slides-list {
+	flex: 1;
+	overflow-y: auto;
+	padding: 8px;
+}
+
+.slide-thumb {
+	position: relative;
+	background: var(--bg-light);
+	border-radius: 8px;
+	padding: 12px;
+	margin-bottom: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border: 2px solid transparent;
+	min-height: 60px;
+}
+
+.slide-thumb:hover {
+	background: var(--hover-color);
+}
+
+.slide-thumb.active {
+	border-color: var(--selected-color);
+	background: rgba(33, 150, 243, 0.15);
+}
+
+.thumb-number {
+	position: absolute;
+	top: 6px;
+	left: 8px;
+	font-size: 12px;
+	font-weight: bold;
+	color: var(--text-secondary);
+}
+
+.thumb-content {
+	font-size: 11px;
+	color: var(--text-secondary);
+	line-height: 1.4;
+	max-height: 45px;
+	overflow: hidden;
+}
+
+.thumb-delete {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 24px;
+	height: 24px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--text-secondary);
+	cursor: pointer;
+	opacity: 0;
+	transition: all 0.2s ease;
+	font-size: 12px;
+}
+
+.slide-thumb:hover .thumb-delete {
+	opacity: 1;
+}
+
+.thumb-delete:hover {
+	background: var(--danger-color);
+	color: white;
+}
+
+.sidebar-footer {
+	padding: 12px;
+	border-top: 1px solid var(--border-color);
+}
+
+.btn-add-slide {
+	width: 100%;
+	padding: 12px;
+	border: 2px dashed var(--border-color);
+	border-radius: 8px;
+	background: transparent;
+	color: var(--text-secondary);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	font-size: 14px;
+}
+
+.btn-add-slide:hover {
+	border-color: var(--selected-color);
+	color: var(--selected-color);
+}
+
+/* ============================================
+   Editor Main (Center Panel)
+   ============================================ */
+.editor-main {
+	background: var(--bg-darker);
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid var(--border-color);
+}
+
+.editor-toolbar {
+	height: var(--toolbar-height);
+	background: var(--bg-dark);
+	border-bottom: 1px solid var(--border-color);
+	display: flex;
+	align-items: center;
+	padding: 0 16px;
+	gap: 16px;
+	overflow-x: auto;
+}
+
+.toolbar-group {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.toolbar-group label {
+	font-size: 12px;
+	color: var(--text-secondary);
+	white-space: nowrap;
+}
+
+.toolbar-group select,
+.toolbar-group input[type="text"] {
+	padding: 6px 10px;
+	border-radius: 4px;
+	border: 1px solid var(--border-color);
+	background: var(--bg-light);
+	color: var(--text-primary);
+	font-size: 12px;
+}
+
+.toolbar-group select {
+	min-width: 100px;
+}
+
+.toolbar-group input[type="text"] {
+	width: 120px;
+}
+
+.toolbar-group input[type="color"] {
+	width: 32px;
+	height: 28px;
+	padding: 2px;
+	border-radius: 4px;
+	border: 1px solid var(--border-color);
+	cursor: pointer;
+}
+
+.editor-content {
+	flex: 1;
+	padding: 24px;
+	overflow: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.slide-editor {
+	width: 100%;
+	max-width: 800px;
+	/* Match reveal.js slide aspect ratio (16:9) */
+	aspect-ratio: 16/9;
+	min-height: 450px;
+	padding: 48px;
+	border-radius: 8px;
+	background: black;
+	color: white;
+	overflow: auto;
+	outline: none;
+	font-size: 28px;
+	line-height: 1.6;
+}
+
+.slide-editor:focus {
+	box-shadow: 0 0 0 3px var(--selected-color);
+}
+
+.slide-editor h1 {
+	font-size: 2.2em;
+	margin-bottom: 0.5em;
+}
+
+.slide-editor h2 {
+	font-size: 1.5em;
+	margin: 0.8em 0 0.5em;
+}
+
+.slide-editor h3 {
+	font-size: 1.2em;
+	margin: 0.6em 0 0.4em;
+}
+
+.slide-editor p {
+	margin: 0.5em 0;
+}
+
+.slide-editor ul,
+.slide-editor ol {
+	margin: 0.5em 0;
+	padding-left: 1.5em;
+}
+
+.slide-editor li {
+	margin: 0.3em 0;
+}
+
+.slide-editor code {
+	background: rgba(255,255,255,0.15);
+	padding: 2px 6px;
+	border-radius: 3px;
+	font-family: 'Fira Code', monospace;
+}
+
+.slide-editor pre {
+	background: rgba(0,0,0,0.5);
+	padding: 16px;
+	border-radius: 6px;
+	overflow-x: auto;
+}
+
+.slide-editor a {
+	color: var(--selected-color);
+}
+
+.slide-editor blockquote {
+	border-left: 4px solid var(--selected-color);
+	padding-left: 16px;
+	margin: 1em 0;
+	color: var(--text-secondary);
+	font-style: italic;
+}
+
+.slide-editor hr {
+	border: none;
+	border-top: 2px solid var(--border-color);
+	margin: 1.5em 0;
+}
+
+.slide-editor img {
+	max-width: 100%;
+	height: auto;
+}
+
+.editor-help {
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+}
+
+.btn-help {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background: var(--bg-light);
+	color: var(--text-secondary);
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.btn-help:hover {
+	background: var(--hover-color);
+}
+
+/* ============================================
+   Preview (Right Panel)
+   ============================================ */
+.preview-panel {
+	background: var(--bg-darker);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.preview-header {
+	height: var(--toolbar-height);
+	background: var(--bg-dark);
+	border-bottom: 1px solid var(--border-color);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	font-size: 14px;
+	color: var(--text-secondary);
+}
+
+.preview-controls {
+	display: flex;
+	gap: 8px;
+}
+
+.btn-preview {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background: var(--accent-color);
+	color: white;
+	cursor: pointer;
+	font-size: 12px;
+	font-weight: 500;
+	transition: all 0.2s ease;
+}
+
+.btn-preview:hover {
+	transform: scale(1.02);
+}
+
+.reveal-preview {
+	flex: 1;
+	padding: 20px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #111;
+}
+
+/* Override reveal.js preview styles */
+.reveal-preview .reveal {
+	width: 100%;
+	height: 100%;
+	max-width: 600px;
+	max-height: 400px;
+	background: black;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.reveal-preview .slides {
+	width: 100%;
+	height: 100%;
+}
+
+.reveal-preview section {
+	width: 100%;
+	height: 100%;
+	padding: 40px;
+	display: flex !important;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+.reveal-preview section h1 {
+	font-size: 2em;
+	margin-bottom: 0.5em;
+}
+
+.reveal-preview section h2 {
+	font-size: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+.reveal-preview section p {
+	font-size: 0.9em;
+}
+
+/* ============================================
+   Modal
+   ============================================ */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7);
+	z-index: 1000;
+	align-items: center;
+	justify-content: center;
+}
+
+.modal-content {
+	background: var(--bg-dark);
+	border-radius: 12px;
+	padding: 24px;
+	max-width: 500px;
+	width: 90%;
+	max-height: 80vh;
+	overflow: auto;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.modal-header h2 {
+	margin: 0;
+	font-size: 18px;
+}
+
+.modal-close {
+	width: 32px;
+	height: 32px;
+	border: none;
+	border-radius: 4px;
+	background: transparent;
+	color: var(--text-secondary);
+	cursor: pointer;
+	font-size: 20px;
+}
+
+.modal-close:hover {
+	background: var(--bg-light);
+}
+
+.modal-body table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.modal-body td {
+	padding: 8px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.modal-body kbd {
+	background: var(--bg-light);
+	padding: 2px 6px;
+	border-radius: 3px;
+	font-family: monospace;
+}
+
+.modal-body pre {
+	background: var(--bg-light);
+	padding: 12px;
+	border-radius: 4px;
+	overflow-x: auto;
+	font-size: 12px;
+}
+
+/* ============================================
+   Scrollbars
+   ============================================ */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--border-color);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--secondary-color);
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 1200px) {
+	.editor-container {
+		grid-template-columns: var(--sidebar-width) 1fr;
+	}
+	
+	.preview-panel {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	:root {
+		--sidebar-width: 60px;
+	}
+	
+	.sidebar-header,
+	.sidebar-toolbar span,
+	.thumb-content,
+	.sidebar-footer span,
+	.sidebar-footer {
+		display: none;
+	}
+	
+	.sidebar-toolbar {
+		flex-direction: column;
+	}
+	
+	.btn-tool {
+		width: 44px;
+		height: 44px;
+	}
+	
+	.slide-thumb {
+		padding: 8px;
+	}
+	
+	.thumb-number {
+		position: static;
+		text-align: center;
+	}
+}
