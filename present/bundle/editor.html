@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reveal.js Presentation Editor</title>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css" id="editor-theme">
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	<link rel="stylesheet" href="editor.css">
+</head>
+<body>
+<div class="editor-container">
+	<!-- Left Sidebar: Slide Thumbnails -->
+	<aside class="sidebar">
+		<div class="sidebar-header">
+			<h1 class="logo">📝 Reveal Editor</h1>
+		</div>
+		
+		<div class="sidebar-toolbar">
+			<button class="btn-tool" id="btn-new" title="New Presentation">
+				<span class="icon">➕</span>
+			</button>
+			<button class="btn-tool" id="btn-import" title="Import Markdown">
+				<span class="icon">📥</span>
+			</button>
+			<button class="btn-tool" id="btn-export" title="Export HTML">
+				<span class="icon">📤</span>
+			</button>
+		</div>
+		
+		<div class="slides-list" id="slides-list">
+			<!-- Thumbnails will be generated here -->
+		</div>
+		
+		<div class="sidebar-footer">
+			<button class="btn-add-slide" id="btn-add-slide">
+				<span>➕ Add Slide</span>
+			</button>
+		</div>
+	</aside>
+
+	<!-- Center: Slide Editor -->
+	<main class="editor-main">
+		<div class="editor-toolbar">
+			<div class="toolbar-group">
+				<label>Layout:</label>
+				<select id="slide-layout">
+					<option value="">Title Slide</option>
+					<option value="bullets">Bullets</option>
+					<option value="two-column">Two Column</option>
+					<option value="code">Code Block</option>
+					<option value="image">With Image</option>
+					<option value="blank">Blank</option>
+				</select>
+			</div>
+			
+			<div class="toolbar-group">
+				<label>Background:</label>
+				<input type="color" id="slide-bg-color" value="#000000" title="Background Color">
+				<input type="text" id="slide-bg-image" placeholder="Image URL" title="Background Image">
+			</div>
+			
+			<div class="toolbar-group">
+				<label>Transition:</label>
+				<select id="slide-transition">
+					<option value="">None</option>
+					<option value="slide">Slide</option>
+					<option value="convex">Convex</option>
+					<option value="concave">Concave</option>
+					<option value="zoom">Zoom</option>
+					<option value="fade">Fade</option>
+				</select>
+			</div>
+			
+			<div class="toolbar-group">
+				<label>Theme:</label>
+				<select id="presentation-theme">
+					<option value="black">Black</option>
+					<option value="white">White</option>
+					<option value="league">League</option>
+					<option value="beige">Beige</option>
+					<option value="sky">Sky</option>
+					<option value="night">Night</option>
+					<option value="serif">Serif</option>
+					<option value="simple">Simple</option>
+					<option value="solarized">Solarized</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="editor-content" id="editor-content">
+			<div class="slide-editor" contenteditable="true" id="slide-editor">
+				<h1>Your Title Here</h1>
+				<p>Subtitle or presenter name</p>
+			</div>
+		</div>
+		
+		<div class="editor-help">
+			<button class="btn-help" id="btn-help">❓ Help</button>
+		</div>
+	</main>
+
+	<!-- Right: Live Preview -->
+	<section class="preview-panel">
+		<div class="preview-header">
+			<span>Preview</span>
+			<div class="preview-controls">
+				<button class="btn-preview" id="btn-play" title="Play Presentation">▶️ Play</button>
+			</div>
+		</div>
+		<div class="reveal-preview">
+			<div class="reveal">
+				<div class="slides" id="preview-slides">
+					<!-- Preview slides will be rendered here -->
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<!-- Hidden file input for importing -->
+<input type="file" id="file-input" accept=".md,.txt,text/markdown" style="display:none">
+
+<!-- Help Modal -->
+<div class="modal" id="help-modal">
+	<div class="modal-content">
+		<div class="modal-header">
+			<h2>Keyboard Shortcuts</h2>
+			<button class="modal-close" id="modal-close">&times;</button>
+		</div>
+		<div class="modal-body">
+			<table class="shortcuts-table">
+				<tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd></td><td>Save/Export</td></tr>
+				<tr><td><kbd>Ctrl</kbd> + <kbd>N</kbd></td><td>New Presentation</td></tr>
+				<tr><td><kbd>Ctrl</kbd> + <kbd>Enter</kbd></td><td>Play Presentation</td></tr>
+				<tr><td><kbd>Alt</kbd> + <kbd>Arrow</kbd></td><td>Navigate Slides</td></tr>
+				<tr><td><kbd>Esc</kbd></td><td>Exit Fullscreen/Overview</td></tr>
+			</table>
+			<h3>Markdown Syntax</h3>
+			<pre># Heading 1 (title)
+## Heading 2 (section)
+- Bullet point (use - or *)
+1. Numbered list
+> Quote / Note
+---
+_notes_: Speaker notes (Note:)
+</pre>
+		</div>
+	</div>
+</div>
+
+<!-- Scripts -->
+<script src="dist/reveal.js"></script>
+<script src="dist/plugin/markdown.js"></script>
+<script src="dist/plugin/highlight.js"></script>
+<script src="dist/plugin/notes.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>
